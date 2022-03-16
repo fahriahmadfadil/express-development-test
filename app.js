@@ -3,6 +3,8 @@ const express = require("express");
 const jwt = require('express-jwt');
 const bodyParser = require("body-parser");
 const cors = require('cors');
+const jwt = require('express-jwt');
+const tokenSecret = process.env.TOKEN_SECRET || "ljTZBnxfIXoELSH";
 
 const app = express();
 
@@ -19,6 +21,7 @@ app.use("/", indexRouter);
 app.use("/auth",authRouter);
 app.use(eventRouter);
 
+app.use(jwt({ secret: tokenSecret,algorithms: ['HS256']}).unless({path: ['/','/auth']}));
 
 // catch 404 and show error route
 app.use(function (req, res, next) {
