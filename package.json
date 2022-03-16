@@ -1,0 +1,27 @@
+{
+  "name": "express-development-test",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./server"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.16.7",
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "~4.16.1",
+    "express-jwt": "^6.0.0",
+    "fastest-validator": "^1.9.0",
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^2.0.7",
+    "pg": "^8.5.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.13.0"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.4.1"
+  }
+}
