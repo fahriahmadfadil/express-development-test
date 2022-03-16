@@ -15,7 +15,6 @@ const requestLogin = async (req,res,next) => {
             const processLogin = await authRepo.checkLogin(username);
             if(processLogin.status === true){
                 const passwordHash = processLogin.password;
-                console.log(passwordHash)
                 const match = await bcrypt.compare(password, passwordHash);
                 if(match){
                     const data = {user_id:processLogin.user_id,name:processLogin.name,email:processLogin.email}
@@ -63,7 +62,7 @@ const registerUsers = async (req,res,next) => {
                     models.User.create(dataUsers).then((result) => {
                         res.status(200).json({status:true,result,message:"register new users successfully"});
                     }).catch((error) => {
-                        res.status(500).json({status:true,message:"register new users failed : " + error});
+                        res.status(500).json({status:false,message:"register new users failed : " + error});
                     })
                 });
             });

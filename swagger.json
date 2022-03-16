@@ -1,0 +1,473 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is docs API of Event App Development",
+    "version": "0.0.1",
+    "title": "Event App Development",
+    "contact": {
+      "email": "fahriahmadfadil@gmail.com"
+    }
+  },
+  "host": "localhost",
+  "basePath": "/docs",
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Everything about Authentication"
+    },
+    {
+      "name": "Event",
+      "description": "Everything about Events"
+    }
+  ],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Body value for login",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "admin@email.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "admin12345"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "login successfully"
+                },
+                "token": {
+                  "type": "string",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJuYW1lIjoiQWRtaW4iLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImlhdCI6MTY0NzQxNjEyOCwiZXhwIjoxNjQ3NTAyNTI4fQ.eSyTUzdDefCrvjjgSDGhDO8C2g5l9Cy0Ct-_ovfr74I"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Login Failed",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "wrong username or password"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Body value for register new user",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Administrator"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "admin@email.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "admin12345"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Register Successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "register new users successfully"
+                },
+                "result": {
+                  "type": "object",
+                  "example": {
+                    "name": "Administrator",
+                    "email": "admin@email.com",
+                    "password": "$2b$12$Udh4M/LUC2W1xn8iGxr.m.aICpvlzmglErv1LsQcxX6p3JC71qVUC",
+                    "createdAt": "2022-03-16T07:56:08.977Z",
+                    "updatedAt": "2022-03-16T07:56:08.977Z"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Register Failed",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "register new users failed"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events": {
+      "get": {
+        "tags": [
+          "Event"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Events successfully",
+            "schema": {
+              "type": "object",
+              "example": {
+                "status": true,
+                "data": [
+                  {
+                    "id": 1,
+                    "name": "Event A",
+                    "date": "2022-01-01T00:00:00.000Z",
+                    "time": "12:01:01",
+                    "location": "Bogor",
+                    "image": "/assets/images.png",
+                    "createdAt": "2022-03-16T06:49:13.855Z",
+                    "updatedAt": "2022-03-16T06:49:13.855Z"
+                  }
+                ]
+              }
+            }
+          },
+          "500": {
+            "description": "Something wrong",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "something wrong : error to connect database"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "date",
+            "type": "string",
+            "description": "example : 2022-01-01"
+          },
+          {
+            "in": "formData",
+            "name": "time",
+            "type": "string",
+            "description": "example : 20:00:00"
+          },
+          {
+            "in": "formData",
+            "name": "location",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "image",
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create Events successfully",
+            "schema": {
+              "type": "object",
+              "example": {
+                "status": true,
+                "data": {
+                  "id": 1,
+                  "name": "Event B",
+                  "date": "2022-01-10T00:00:00.000Z",
+                  "time": "12:01:01",
+                  "location": "Bogor",
+                  "image": "/assets/images.png",
+                  "createdAt": "2022-03-16T06:49:13.855Z",
+                  "updatedAt": "2022-03-16T06:49:13.855Z"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Something wrong",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "something wrong : error to connect database"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/{id}": {
+      "put": {
+        "tags": [
+          "Event"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "description": "required event id parameters",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "date",
+            "type": "string",
+            "description": "example : 2022-01-01"
+          },
+          {
+            "in": "formData",
+            "name": "time",
+            "type": "string",
+            "description": "example : 20:00:00"
+          },
+          {
+            "in": "formData",
+            "name": "location",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "image",
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update Events successfully",
+            "schema": {
+              "type": "object",
+              "example": {
+                "status": true,
+                "data": {
+                  "id": 1,
+                  "name": "Event B",
+                  "date": "2022-01-10T00:00:00.000Z",
+                  "time": "12:01:01",
+                  "location": "Bogor",
+                  "image": "/assets/images.png",
+                  "createdAt": "2022-03-16T06:49:13.855Z",
+                  "updatedAt": "2022-03-16T06:49:13.855Z"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Something wrong",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "something wrong : error to connect database"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Event"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "description": "required event id parameters",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Events successfully",
+            "schema": {
+              "type": "object",
+              "example": {
+                "status": true,
+                "data": "delete event successfully"
+              }
+            }
+          },
+          "500": {
+            "description": "Something wrong",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "something wrong : error to connect database"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

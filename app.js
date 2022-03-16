@@ -3,8 +3,9 @@ const express = require("express");
 const jwt = require('express-jwt');
 const bodyParser = require("body-parser");
 const cors = require('cors');
-const jwt = require('express-jwt');
 const tokenSecret = process.env.TOKEN_SECRET || "ljTZBnxfIXoELSH";
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 const app = express();
 
@@ -20,8 +21,9 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/auth",authRouter);
 app.use(eventRouter);
+app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.use(jwt({ secret: tokenSecret,algorithms: ['HS256']}).unless({path: ['/','/auth']}));
+app.use(jwt({ secret: tokenSecret,algorithms: ['HS256']}).unless({path: ['/','/auth','/api-docs']}));
 
 // catch 404 and show error route
 app.use(function (req, res, next) {

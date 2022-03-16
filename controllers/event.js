@@ -111,7 +111,7 @@ function deleteData(req, res, next) {
     const id = req.params.id;
     models.Event.destroy({ where: { id: id } })
         .then((result) => {
-            res.status(200).json(responds(true, result));
+            res.status(200).json(responds(true, "delete event successfully"));
         })
         .catch((error) => {
             res.status(500).json(responds(false, "something wrong : "+error));
